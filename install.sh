@@ -11,6 +11,7 @@ ohgpg-decrypt $OH_MY_REPO/secrets/gpg-private-key.secret | gpg --import
 ) | gpg --command-fd 0 --edit-key $GPGID
 
 ohgpg-decrypt $OH_MY_REPO/secrets/ssh-private-key.secret >$SSH_KEY_PATH && sudo ssh-keygen -y -f $SSH_KEY_PATH >$SSH_KEY_PATH.pub
+chmod 600 $SSH_KEY_PATH
 
 sudo apt update
 sudo apt install -y curl fzf tldr
