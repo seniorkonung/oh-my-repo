@@ -2,18 +2,17 @@
 
 set -e
 
-pushd /tmp
+(
+    cd /tmp
 
-curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
-unzip -o rclone-current-linux-amd64.zip
+    curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+    unzip -o rclone-current-linux-amd64.zip
 
-pushd rclone-*-linux-amd64
+    cd rclone-*-linux-amd64
 
-cp --force rclone $BIN_PATH
-chmod 755 $BIN_PATH
-
-popd
-popd
+    cp --force rclone $BIN_PATH
+    chmod 755 $BIN_PATH
+)
 
 COMPLETION_FILE=~/.local/completion-for-rclone.zsh
 

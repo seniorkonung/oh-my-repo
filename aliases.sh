@@ -17,9 +17,12 @@ alias tg="ohbackground telegram-desktop && exit"
 alias vpn-start="sudo systemctl start outline.service"
 alias vpn-status="sudo systemctl status outline.service"
 alias vpn-stop="sudo systemctl stop outline.service"
+alias vpn-manager="ohoutline-manager"
 
 alias gdrive-start="systemctl --user start rclone-google-drive.service"
 alias gdrive-status="systemctl --user status rclone-google-drive.service"
 alias gdrive-stop="systemctl --user stop rclone-google-drive.service"
 
 alias pn="pnpm"
+alias en="trans -b en:ru"
+alias ru="trans -b ru:en"

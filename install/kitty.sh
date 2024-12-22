@@ -2,7 +2,7 @@
 
 set -e
 
-if command -v kitty &>/dev/null; then
+if command -v kitty >/dev/null 2>&1; then
     echo "Kitty уже установлен!!!"
     return 0
 fi

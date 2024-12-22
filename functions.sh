@@ -15,6 +15,11 @@ function ohkeepassxc {
     exit
 }
 
+function ohoutline-manager {
+    ohbackground Outline-Manager.AppImage --no-sandbox
+    exit
+}
+
 function ohssh-copy {
     ssh-copy-id -i $SSH_KEY_PATH $1@$2
 }
