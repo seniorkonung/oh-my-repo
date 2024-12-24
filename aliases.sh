@@ -24,5 +24,6 @@ alias gdrive-status="systemctl --user status rclone-google-drive.service"
 alias gdrive-stop="systemctl --user stop rclone-google-drive.service"
 
 alias pn="pnpm"
+alias pnx="pnpm dlx"
 alias en="trans -b en:ru"
 alias ru="trans -b ru:en"
