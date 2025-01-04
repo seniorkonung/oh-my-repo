@@ -28,5 +28,7 @@ alias gdrive-refresh="rclone config reconnect senior.konung: && gdrive-restart"
 
 alias pn="pnpm"
 alias px="pnpm dlx"
+alias pn-clear="rm -rf node_modules **/node_modules** pnpm-lock.yaml"
+
 alias en="trans -b en:ru"
 alias ru="trans -b ru:en"
