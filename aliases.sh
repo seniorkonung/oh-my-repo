@@ -23,6 +23,8 @@ alias vpn-manager="ohoutline-manager"
 alias gdrive-start="systemctl --user start rclone-google-drive.service"
 alias gdrive-status="systemctl --user status rclone-google-drive.service"
 alias gdrive-stop="systemctl --user stop rclone-google-drive.service"
+alias gdrive-restart="systemctl --user restart rclone-google-drive.service"
+alias gdrive-refresh="rclone config reconnect senior.konung: && gdrive-restart"
 
 alias pn="pnpm"
 alias px="pnpm dlx"
