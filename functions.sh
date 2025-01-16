@@ -28,8 +28,12 @@ function ruclip {
     echo $1 | ru | kitten clipboard
 }
 
-# Example: ohcert-gen localhost DNS:localhost IP:192.168.0.10
 function ohcert-gen {
+    if [[ $# < 2 ]]; then
+        echo "Example: ohcert-gen localhost DNS:localhost IP:192.168.0.10"
+        return 1
+    fi
+
     local certs_dir=~/certs
     local certs_register_dir=/usr/local/share/ca-certificates
     local alt_names=$(
