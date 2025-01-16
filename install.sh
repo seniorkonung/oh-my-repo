@@ -16,7 +16,7 @@ ohgpg-decrypt $OH_MY_REPO/secrets/ssh-private-key.secret >$SSH_KEY_PATH && sudo 
 chmod 600 $SSH_KEY_PATH
 
 sudo apt update
-sudo apt install -y curl fzf tldr translate-shell
+sudo apt install -y curl fzf tldr translate-shell libnss3-tools
 
 source $OH_MY_REPO/install/zsh.sh
 source $OH_MY_REPO/install/kitty.sh
