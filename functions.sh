@@ -34,7 +34,7 @@ function ohcert-gen {
     local certs_register_dir=/usr/local/share/ca-certificates
     local alt_names=$(
         args=($@)
-        echo ${args[@]:1} | sed -r "s/^\s//" | sed -r "s/\s/,/g"
+        echo ${args:1} | sed -r "s/\s/,/g"
     )
     mkdir -p $certs_dir $certs_register_dir
 
