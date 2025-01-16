@@ -23,3 +23,7 @@ function ohoutline-manager {
 function ohssh-copy {
     ssh-copy-id -i $SSH_KEY_PATH $1@$2
 }
+
+function ohssh-certgen {
+    openssl req -x509 -newkey rsa:2048 -nodes -sha256 -subj "/CN=$1" -keyout "$1.private-key.pem" -out "$1.certificate.pem"
+}
