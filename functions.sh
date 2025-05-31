@@ -6,7 +6,7 @@ function ohbackground {
 }
 
 function ohsession {
-    ohbackground kitty --session $OH_MY_REPO/kitty/sessions/$1
+    kitty --detach --session $OH_MY_REPO/kitty/sessions/$1
     exit
 }
 
