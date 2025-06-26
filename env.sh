@@ -8,8 +8,8 @@ export BIN_PATH=~/.local/bin
 export SSH_KEY_PATH=~/.ssh/id_ed25519
 
 export PATH=$PATH:$BIN_PATH
+export PATH=$PATH:/usr/local/go/bin
 
-export NVM_DIR=~/.nvm
 export ZSH=~/.oh-my-zsh
 
 source $OH_MY_REPO/aliases.sh
