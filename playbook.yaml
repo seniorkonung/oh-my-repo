@@ -11,114 +11,117 @@
       ohmyrepo: "{{ playbook_dir }}"
 
   tasks:
-    - name: Проверить наличие приватного GPG-ключа
-      ansible.builtin.shell: |
-        gpg --list-secret-keys {{ gpgid }} | grep -q 'sec'
-      register: gpg_key_check
-      ignore_errors: true
-      changed_when: false
+    # - name: Проверить наличие приватного GPG-ключа
+    #   ansible.builtin.shell: |
+    #     gpg --list-secret-keys {{ gpgid }} | grep -q 'sec'
+    #   register: gpg_key_check
+    #   ignore_errors: true
+    #   changed_when: false
 
-    - name: Загрузить gpg ключ
-      ansible.builtin.shell:
-        cmd: |
-          set -o pipefail &&
-          gpg -d -q {{ paths.ohmyrepo }}/secrets/gpg-private-key.secret | gpg --import
-          (
-            echo trust &
-            echo 5 &
-            echo y &
-            echo quit
-          ) | gpg --command-fd 0 --edit-key {{ gpgid }}
-        executable: /bin/bash
-      when: gpg_key_check.rc != 0
-      changed_when: true
+    # - name: Загрузить gpg ключ
+    #   ansible.builtin.shell:
+    #     cmd: |
+    #       set -o pipefail &&
+    #       gpg -d -q {{ paths.ohmyrepo }}/secrets/gpg-private-key.secret | gpg --import
+    #       (
+    #         echo trust &
+    #         echo 5 &
+    #         echo y &
+    #         echo quit
+    #       ) | gpg --command-fd 0 --edit-key {{ gpgid }}
+    #     executable: /bin/bash
+    #   when: gpg_key_check.rc != 0
+    #   changed_when: true
 
-    - name: Загрузить приватный ssh ключ
-      ansible.builtin.command: gpg -d -q {{ paths.ohmyrepo }}/secrets/ssh-private-key.secret
-      register: ssh_private_key
-      changed_when: false
+    # - name: Загрузить приватный ssh ключ
+    #   ansible.builtin.command: gpg -d -q {{ paths.ohmyrepo }}/secrets/ssh-private-key.secret
+    #   register: ssh_private_key
+    #   changed_when: false
 
-    - name: Сохранить приватный ssh ключ
-      ansible.builtin.shell:
-        cmd: |
-          set -o pipefail &&
-          touch {{ ansible_env.HOME }}/.ssh/id_ed25519 &&
-          chmod 0600 {{ ansible_env.HOME }}/.ssh/id_ed25519 &&
-          echo "{{ ssh_private_key.stdout }}" > {{ ansible_env.HOME }}/.ssh/id_ed25519
-        executable: /bin/bash
-      changed_when: true
+    # - name: Сохранить приватный ssh ключ
+    #   ansible.builtin.shell:
+    #     cmd: |
+    #       set -o pipefail &&
+    #       touch {{ ansible_env.HOME }}/.ssh/id_ed25519 &&
+    #       chmod 0600 {{ ansible_env.HOME }}/.ssh/id_ed25519 &&
+    #       echo "{{ ssh_private_key.stdout }}" > {{ ansible_env.HOME }}/.ssh/id_ed25519
+    #     executable: /bin/bash
+    #   changed_when: true
 
-    - name: Сгенерировать публичный ssh
-      become: true
-      ansible.builtin.command:
-        cmd: ssh-keygen -y -f {{ ansible_env.HOME }}/.ssh/id_ed25519
-        creates: "{{ ansible_env.HOME }}/.ssh/id_ed25519.pub"
-      register: ssh_public_key
-      changed_when: false
+    # - name: Сгенерировать публичный ssh
+    #   become: true
+    #   ansible.builtin.command:
+    #     cmd: ssh-keygen -y -f {{ ansible_env.HOME }}/.ssh/id_ed25519
+    #     creates: "{{ ansible_env.HOME }}/.ssh/id_ed25519.pub"
+    #   register: ssh_public_key
+    #   changed_when: false
 
-    - name: Сохранить приватный ssh ключ
-      ansible.builtin.shell:
-        cmd: |
-          set -o pipefail &&
-          touch {{ ansible_env.HOME }}/.ssh/id_ed25519.pub &&
-          chmod 0644 {{ ansible_env.HOME }}/.ssh/id_ed25519.pub &&
-          echo "{{ ssh_public_key.stdout }}" > {{ ansible_env.HOME }}/.ssh/id_ed25519.pub
-        executable: /bin/bash
-      changed_when: true
+    # - name: Сохранить приватный ssh ключ
+    #   ansible.builtin.shell:
+    #     cmd: |
+    #       set -o pipefail &&
+    #       touch {{ ansible_env.HOME }}/.ssh/id_ed25519.pub &&
+    #       chmod 0644 {{ ansible_env.HOME }}/.ssh/id_ed25519.pub &&
+    #       echo "{{ ssh_public_key.stdout }}" > {{ ansible_env.HOME }}/.ssh/id_ed25519.pub
+    #     executable: /bin/bash
+    #   changed_when: true
 
-    - name: Установить смену раскладки клавиатуры на tab
-      ansible.builtin.command: gsettings set org.gnome.desktop.input-sources xkb-options "['grp:caps_toggle']"
-      changed_when: true
+    # - name: Установить смену раскладки клавиатуры на tab
+    #   ansible.builtin.command: gsettings set org.gnome.desktop.input-sources xkb-options "['grp:caps_toggle']"
+    #   changed_when: true
 
-    - name: Установить различные утилиты и зависимости
-      become: true
-      ansible.builtin.apt:
-        name:
-          - curl
-          - ca-certificates
-          - ssh-askpass
+    # - name: Установить различные утилиты и зависимости
+    #   become: true
+    #   ansible.builtin.apt:
+    #     name:
+    #       - curl
+    #       - ca-certificates
+    #       - ssh-askpass
 
-    - name: Добавить приватный ключ в ssh-агент
-      ansible.builtin.command: "ssh-add {{ ansible_env.HOME }}/.ssh/id_ed25519"
-      changed_when: true
+    # - name: Добавить приватный ключ в ssh-агент
+    #   ansible.builtin.command: "ssh-add {{ ansible_env.HOME }}/.ssh/id_ed25519"
+    #   changed_when: true
 
-    - name: Проверить наличие volta
-      ansible.builtin.command: volta -v
-      register: volta_check
-      failed_when: false
-      changed_when: false
+    # - name: Проверить наличие volta
+    #   ansible.builtin.command: volta -v
+    #   register: volta_check
+    #   failed_when: false
+    #   changed_when: false
 
-    - name: Установить volta
-      ansible.builtin.shell:
-        cmd: set -o pipefail && curl https://get.volta.sh | bash
-        executable: /bin/bash
-      when: volta_check.rc != 0
-      changed_when: true
+    # - name: Установить volta
+    #   ansible.builtin.shell:
+    #     cmd: set -o pipefail && curl https://get.volta.sh | bash
+    #     executable: /bin/bash
+    #   when: volta_check.rc != 0
+    #   changed_when: true
 
-    - name: Проверить наличие pnpm
-      ansible.builtin.command: pnpm -v
-      register: pnpm_check
-      failed_when: false
-      changed_when: false
+    # - name: Проверить наличие pnpm
+    #   ansible.builtin.command: pnpm -v
+    #   register: pnpm_check
+    #   failed_when: false
+    #   changed_when: false
 
-    - name: Установить pnpm
-      ansible.builtin.shell:
-        cmd: set -o pipefail && curl -fsSL https://get.pnpm.io/install.sh | sh -
-        executable: /bin/bash
-      when: pnpm_check.rc != 0
-      changed_when: true
+    # - name: Установить pnpm
+    #   ansible.builtin.shell:
+    #     cmd: set -o pipefail && curl -fsSL https://get.pnpm.io/install.sh | sh -
+    #     executable: /bin/bash
+    #   when: pnpm_check.rc != 0
+    #   changed_when: true
 
-    - name: Установить zsh и oh-my-zsh
-      ansible.builtin.import_tasks: tasks/zsh-setup.ansible.yaml
+    # - name: Установить zsh и oh-my-zsh
+    #   ansible.builtin.import_tasks: tasks/zsh-setup.ansible.yaml
 
-    - name: Установить kitty терминал
-      ansible.builtin.import_tasks: tasks/kitty-setup.ansible.yaml
+    # - name: Установить kitty терминал
+    #   ansible.builtin.import_tasks: tasks/kitty-setup.ansible.yaml
 
-    - name: Настроить конфигурацию git
-      ansible.builtin.import_tasks: tasks/git-config.ansible.yaml
+    # - name: Настроить конфигурацию git
+    #   ansible.builtin.import_tasks: tasks/git-config.ansible.yaml
 
-    - name: Установить и зарегистрировать как службу rclone
-      ansible.builtin.import_tasks: tasks/rclone-setup.ansible.yaml
+    # - name: Установить и зарегистрировать как службу rclone
+    #   ansible.builtin.import_tasks: tasks/rclone-setup.ansible.yaml
 
-    - name: Установить docker
-      ansible.builtin.import_tasks: tasks/docker-setup.ansible.yaml
+    # - name: Установить docker
+    #   ansible.builtin.import_tasks: tasks/docker-setup.ansible.yaml
+
+    - name: Установить watchman
+      ansible.builtin.import_tasks: tasks/watchman-setup.ansible.yaml
