@@ -70,10 +70,12 @@
       ansible.builtin.command: gsettings set org.gnome.desktop.input-sources xkb-options "['grp:caps_toggle']"
       changed_when: true
 
-    - name: Установить curl
+    - name: Установить curl и ca-certificates
       become: true
       ansible.builtin.apt:
-        name: curl
+        name:
+          - curl
+          - ca-certificates
 
     - name: Проверить наличие volta
       ansible.builtin.command: volta -v
@@ -112,3 +114,6 @@
 
     - name: Установить и зарегистрировать как службу rclone
       ansible.builtin.import_tasks: tasks/rclone-setup.ansible.yaml
+
+    - name: Установить docker
+      ansible.builtin.import_tasks: tasks/docker-setup.ansible.yaml
