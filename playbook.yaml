@@ -78,7 +78,6 @@
           - ca-certificates
           - openjdk-17-jdk
           - fzf
-          - keychain
 
     - name: Проверить наличие volta
       ansible.builtin.command: volta -v
