@@ -75,6 +75,32 @@
       ansible.builtin.apt:
         name: curl
 
+    - name: Проверить наличие volta
+      ansible.builtin.command: volta -v
+      register: volta_check
+      failed_when: false
+      changed_when: false
+
+    - name: Установить volta
+      ansible.builtin.shell:
+        cmd: set -o pipefail && curl https://get.volta.sh | bash
+        executable: /bin/bash
+      when: volta_check.rc != 0
+      changed_when: true
+
+    - name: Проверить наличие pnpm
+      ansible.builtin.command: pnpm -v
+      register: pnpm_check
+      failed_when: false
+      changed_when: false
+
+    - name: Установить pnpm
+      ansible.builtin.shell:
+        cmd: set -o pipefail && curl -fsSL https://get.pnpm.io/install.sh | sh -
+        executable: /bin/bash
+      when: pnpm_check.rc != 0
+      changed_when: true
+
     - name: Установить zsh и oh-my-zsh
       ansible.builtin.import_tasks: tasks/zsh-setup.ansible.yaml
 
