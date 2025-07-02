@@ -66,14 +66,14 @@
         executable: /bin/bash
       changed_when: true
 
-    - name: Запускать ssh-add в .profile
-      ansible.builtin.blockinfile:
+    - name: Добавить конфигурацию ssh
+      ansible.builtin.copy:
         content: |
-          if [ -z "$SSH_AUTH_SOCK" ]; then
-            eval $(ssh-agent -s)
-            ssh-add ~/.ssh/id_ed25519
-          fi
-        path: "{{ ansible_env.HOME }}/.profile"
+          Host *
+            AddKeysToAgent yes
+            IdentityFile ~/.ssh/id_ed25519
+        dest: "{{ ansible_env.HOME }}/.ssh/config"
+        mode: '0644'
 
     - name: Установить смену раскладки клавиатуры на tab
       ansible.builtin.command: gsettings set org.gnome.desktop.input-sources xkb-options "['grp:caps_toggle']"
@@ -86,7 +86,16 @@
           - curl
           - ca-certificates
           - openjdk-17-jdk
+          - keychain
           - fzf
+
+    - name: Запускать ssh-agent в .profile
+      ansible.builtin.blockinfile:
+        content: |
+          if [ -z "$SSH_AUTH_SOCK" ]; then
+            eval $(keychain --eval --agents ssh ~/.ssh/id_ed25519)
+          fi
+        path: "{{ ansible_env.HOME }}/.profile"
 
     - name: Проверить наличие volta
       ansible.builtin.command: volta -v
