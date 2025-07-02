@@ -70,12 +70,17 @@
       ansible.builtin.command: gsettings set org.gnome.desktop.input-sources xkb-options "['grp:caps_toggle']"
       changed_when: true
 
-    - name: Установить curl и ca-certificates
+    - name: Установить различные утилиты и зависимости
       become: true
       ansible.builtin.apt:
         name:
           - curl
           - ca-certificates
+          - ssh-askpass
+
+    - name: Добавить приватный ключ в ssh-агент
+      ansible.builtin.command: "ssh-add {{ ansible_env.HOME }}/.ssh/id_ed25519"
+      changed_when: true
 
     - name: Проверить наличие volta
       ansible.builtin.command: volta -v
