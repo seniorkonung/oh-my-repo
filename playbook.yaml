@@ -66,6 +66,15 @@
         executable: /bin/bash
       changed_when: true
 
+    - name: Запускать ssh-add в .profile
+      ansible.builtin.blockinfile:
+        content: |
+          if [ -z "$SSH_AUTH_SOCK" ]; then
+            eval $(ssh-agent -s)
+            ssh-add ~/.ssh/id_ed25519
+          fi
+        path: "{{ ansible_env.HOME }}/.profile"
+
     - name: Установить смену раскладки клавиатуры на tab
       ansible.builtin.command: gsettings set org.gnome.desktop.input-sources xkb-options "['grp:caps_toggle']"
       changed_when: true
