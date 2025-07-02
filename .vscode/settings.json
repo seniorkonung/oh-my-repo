@@ -1,6 +1,3 @@
 {
-    "editor.formatOnSave": true,
-    "files.associations": {
-        "*.conf": "shellscript"
-    }
+    "ansible.python.interpreterPath": "/bin/python3"
 }

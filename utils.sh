@@ -12,20 +12,6 @@ function ohsession {
 
 function ohkeepassxc {
     ohbackground zsh -c "ohgpg-decrypt $OH_MY_REPO/secrets/master.secret | keepassxc --pw-stdin ~/gdrive/all.kdbx"
-    exit
-}
-
-function ohoutline-manager {
-    ohbackground Outline-Manager.AppImage --no-sandbox
-    exit
-}
-
-function ohssh-copy {
-    ssh-copy-id -i $SSH_KEY_PATH $1@$2
-}
-
-function ruclip {
-    echo $1 | ru | kitten clipboard
 }
 
 function ohcert-gen {
@@ -49,3 +35,24 @@ function ohcert-gen {
         sudo update-ca-certificates
     )
 }
+
+alias ohgpg-encrypt="gpg --yes --encrypt --recipient $GPGID"
+alias ohgpg-decrypt="gpg -d -q"
+alias ohgpg-public-key="gpg --export --armor $GPGID"
+alias ohssh-keygen="ssh-keygen -t ed25519 -C $EMAIL"
+
+alias ohzsh-clear-completion-cache="sudo rm ~/.zcompdump*"
+
+alias repo="code $OH_MY_REPO"
+alias s="ohsession"
+alias pass="ohkeepassxc"
+
+alias gdrive-start="systemctl --user start rclone-google-drive.service"
+alias gdrive-status="systemctl --user status rclone-google-drive.service"
+alias gdrive-stop="systemctl --user stop rclone-google-drive.service"
+alias gdrive-restart="systemctl --user restart rclone-google-drive.service"
+alias gdrive-refresh="rclone config reconnect senior.konung: && gdrive-restart"
+
+alias pn="pnpm"
+alias px="pnpm dlx"
+alias pn-clear="rm -rf node_modules **/node_modules** pnpm-lock.yaml"
