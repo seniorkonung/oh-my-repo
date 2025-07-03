@@ -46,7 +46,7 @@ alias ohzsh-clear-completion-cache="sudo rm ~/.zcompdump*"
 alias repo="code $OH_MY_REPO"
 alias s="ohsession"
 alias pass="ohkeepassxc"
-alias zshrc="code ~/.zshrc"
+alias rc="code ~/.zshrc"
 
 alias gdrive-start="systemctl --user start rclone-google-drive.service"
 alias gdrive-status="systemctl --user status rclone-google-drive.service"
