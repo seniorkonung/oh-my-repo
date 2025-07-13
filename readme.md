@@ -9,6 +9,7 @@
 3. Запустить приложение пробно напрямую
 4. Запустить команду `xprop | grep WM_CLASS` и тыкнуть курсором по окну приложения. Скопировать второй полученный аргумент. Формат: WM_CLASS(STRING) = "AppName", "AppName"
 5. Создать файл ~/.local/share/applications/{appname}.desktop с содержимым
+
 ```
 [Desktop Entry]
 Name={Название приложения}
@@ -20,4 +21,5 @@ StartupWMClass={Ранее скопированный аргумент}
 StartupNotify=true
 Terminal=false
 ```
+
 6. Обновить кеш `update-desktop-database ~/.local/share/applications`

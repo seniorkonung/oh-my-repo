@@ -2,19 +2,19 @@
   community.general.git_config:
     name: user.name
     scope: global
-    value: "{{ fullname }}"
+    value: '{{ fullname }}'
 
 - name: Установить user.email в Git
   community.general.git_config:
     name: user.email
     scope: global
-    value: "{{ email }}"
+    value: '{{ email }}'
 
 - name: Установить user.signingkey в Git
   community.general.git_config:
     name: user.signingkey
     scope: global
-    value: "{{ gpgid }}"
+    value: '{{ gpgid }}'
 
 - name: Установить commit.gpgsign в Git
   community.general.git_config:
