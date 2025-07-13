@@ -21,9 +21,3 @@ StartupNotify=true
 Terminal=false
 ```
 6. Обновить кеш `update-desktop-database ~/.local/share/applications`
-
-# Установка .deb
-
-```bash
-sudo dpkg -i путь_к_файлу.deb
-```
