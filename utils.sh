@@ -44,7 +44,7 @@ alias ohssh-keygen="ssh-keygen -t ed25519 -C $EMAIL"
 alias ohzsh-clear-completion-cache="sudo rm ~/.zcompdump*"
 
 alias repo="code $OH_MY_REPO"
-alias s="ohsession"
+alias s="code ~/projects/oohey/.vscode/oohey.code-workspace && cd ~/projects/oohey"
 alias pass="ohkeepassxc"
 alias rc="code ~/.zshrc"
 

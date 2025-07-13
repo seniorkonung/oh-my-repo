@@ -19,11 +19,3 @@ matches:
         type: shell
         params:
           cmd: "echo 'Hello from your shell'"
-
-  - trigger: :efn
-    label: 'Effect.fn'
-    replace: |-
-      Effect.fn(function*() {
-        const b = $|$;
-        return 1 as any;
-      })

@@ -3,3 +3,4 @@
 backend: auto
 auto_restart: true
 clipboard_threshold: 100
+restore_clipboard_delay: 300

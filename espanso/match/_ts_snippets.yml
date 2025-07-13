@@ -1,0 +1,158 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
+
+matches:
+  - trigger: :egen
+    label: 'Ts - Effect.gen(...)'
+    force_clipboard: true
+    replace: |-
+      Effect.gen(function*() {
+        const b = $|$;
+        return 1 as any;
+      })
+
+  - trigger: :efn
+    label: 'Ts - Effect.fn(...)'
+    force_clipboard: true
+    replace: |-
+      Effect.fn(function*() {
+        const b = $|$;
+        return 1 as any;
+      })
+
+  - trigger: :fn
+    label: 'Ts - fn("XXX")(...)'
+    force_clipboard: true
+    replace: |-
+      fn('$|$')(function*() {
+        const b = 111;
+        return 1 as any;
+      })
+
+  - trigger: :efnu
+    label: 'Ts - Effect.fnUntraced(...)'
+    force_clipboard: true
+    replace: |-
+      Effect.fnUntraced(function*() {
+        const b = $|$;
+        return 1 as any;
+      })
+
+  - trigger: :imp
+    label: 'Ts - import {  } from "..."'
+    force_clipboard: true
+    replace: import {  } fr{{TEST}}om "{{package}}$|$";
+    vars:
+      - name: package
+        type: choice
+        params:
+          values:
+            - 'effect'
+            - 'react'
+            - 'react-native'
+            - '@effect/'
+            - '@oohey/'
+            - '@reatom/'
+            - '@react-navigation/'
+
+  - trigger: :imp
+    label: 'Ts - import as * XXX from "..."'
+    force_clipboard: true
+    replace: import * as {{as.name}} from "{{package}}$|$";
+    vars:
+      - name: package
+        type: choice
+        params:
+          values:
+            - 'effect'
+            - 'react'
+            - 'react-native'
+            - '@effect/'
+            - '@oohey/'
+            - '@reatom/'
+            - '@react-navigation/'
+      - name: as
+        type: form
+        depends_on:
+          - package
+        params:
+          layout: 'As Name: [[name]]'
+
+  - trigger: :exp
+    label: 'Ts - export const layer = Layer.effect(...)'
+    force_clipboard: true
+    replace: |
+      export const layer = Layer.effect(
+        {{service.name}}.Tag,
+        Effect.gen(function*(){})
+      );
+    vars:
+      - name: service
+        type: form
+        params:
+          layout: 'Service: [[name]].Tag'
+
+  - trigger: :exp
+    label: 'Ts - export abstract class Service {...}'
+    force_clipboard: true
+    replace: |-
+      export abstract class {{service.name}} {
+        static readonly _tag = key('{{service.name}}');
+        static readonly Tag = ContextTag({{service.name}});
+        static readonly fn = ServiceFn({{service.name}});
+      }
+    vars:
+      - name: service
+        type: form
+        params:
+          layout: 'Service: [[name]]'
+
+  - trigger: :exp
+    label: 'Ts - export class Error extends Data.Error<{...}> {...}'
+    force_clipboard: true
+    replace: |-
+      export class {{error.name}} extends Data.Error<{$|$}> {
+        readonly _tag = key('{{error.name}}');
+      }
+    vars:
+      - name: error
+        type: form
+        params:
+          layout: 'Error Name: [[name]]'
+
+  - trigger: ://
+    label: 'Ts - //'
+    force_clipboard: true
+    replace: |-
+      /**
+       * @group {{group}}
+       * @since {{version}}$|$
+       */
+    vars:
+      - name: version
+        type: echo
+        params:
+          echo: 0.0.1
+      - name: group
+        type: choice
+        params:
+          values:
+            - Schemas
+            - Models
+            - Errors
+            - Params
+            - Options
+            - Services
+            - Layers
+            - Apis
+            - Middlewares
+            - Endpoints
+            - Groups
+            - Constructors
+            - Utils
+            - Steps
+            - Constants
+            - Refs
+            - Fiber Refs
+            - Components
+            - Types
+            - Props

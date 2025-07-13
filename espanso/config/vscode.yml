@@ -2,3 +2,5 @@
 
 filter_title: Visual Studio Code
 backend: clipboard
+extra_includes:
+  - ../match/_ts_snippets.yml
