@@ -40,7 +40,7 @@ matches:
   - trigger: :imp
     label: 'Ts - import {  } from "..."'
     force_clipboard: true
-    replace: import {  } fr{{TEST}}om "{{package}}$|$";
+    replace: import {  } from "{{package}}$|$";
     vars:
       - name: package
         type: choice
