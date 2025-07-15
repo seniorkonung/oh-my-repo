@@ -40,7 +40,7 @@ matches:
   - trigger: :imp
     label: 'Ts - import {  } from "..."'
     force_clipboard: true
-    replace: import {  } from "{{package}}$|$";
+    replace: import { $|$ } from "{{package}}";
     vars:
       - name: package
         type: choice
@@ -57,7 +57,7 @@ matches:
   - trigger: :imp
     label: 'Ts - import as * XXX from "..."'
     force_clipboard: true
-    replace: import * as {{as.name}} from "{{package}}$|$";
+    replace: import * as {{as.name}} from "{{package}}";
     vars:
       - name: package
         type: choice
