@@ -125,7 +125,6 @@ matches:
     replace: |-
       /**
        * @group {{group}}
-       * @since {{version}}$|$
        */
     vars:
       - name: version
