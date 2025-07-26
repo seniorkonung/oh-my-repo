@@ -2,4 +2,4 @@
 
 matches:
   - trigger: ':git.dev'
-    replace: git checkout main && git branch -D dev && git pull origin main && git checkout -b dev origin/main
+    replace: git checkout main && git branch -D dev && git pull origin main && git checkout -b dev main
