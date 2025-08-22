@@ -59,7 +59,8 @@ alias px="pnpm dlx"
 alias pne="pnpm exec"
 alias pnr="pnpm run"
 alias pn-clear="rm -rf node_modules **/node_modules** pnpm-lock.yaml **/.turbo** **/build** **/.tsbuildinfo**"
-alias pt="pnpm exec task"
 
 alias gitc="git commit -m"
 alias gitp="git push"
+
+alias t="task"

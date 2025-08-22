@@ -137,3 +137,6 @@
 
     - name: Установить watchman
       ansible.builtin.import_tasks: tasks/watchman-setup.ansible.yaml
+
+    - name: Установить task
+      ansible.builtin.import_tasks: tasks/task-setup.ansible.yaml
