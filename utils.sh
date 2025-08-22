@@ -64,3 +64,4 @@ alias gitc="git commit -m"
 alias gitp="git push"
 
 alias t="task"
+alias tt="task -t ../../"
