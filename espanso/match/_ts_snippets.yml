@@ -88,14 +88,6 @@ matches:
       type key = 111;
       const key = 111;
 
-  - trigger: :idkey
-    label: 'idkey'
-    force_clipboard: true
-    replace: |
-      type id = 111;
-      type key = 111;
-      const key = 111;
-
   - trigger: :plat
     label: '// platform::'
     force_clipboard: true
