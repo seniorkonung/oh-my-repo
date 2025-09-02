@@ -6,29 +6,28 @@ matches:
     force_clipboard: true
     replace: |-
       Effect.gen(function*() {
-        const b = $|$;
         return 1 as any;
       })
+
+  - trigger: :esp
+    label: 'Effect.withSpan(...)(...)'
+    force_clipboard: true
+    replace: |-
+      Effect.withSpan('anonymous')(
+        Effect.gen(function*() {
+          return 1 as any;
+        })
+      )
 
   - trigger: :efn
     label: 'Effect.fn(...)'
     force_clipboard: true
     replace: |-
       Effect.fn(function*() {
-        const b = $|$;
         return 1 as any;
       })
 
-  - trigger: :fn
-    label: 'fn("XXX")(...)'
-    force_clipboard: true
-    replace: |-
-      fn('$|$')(function*() {
-        const b = 111;
-        return 1 as any;
-      })
-
-  - trigger: :efnu
+  - trigger: :efn
     label: 'Effect.fnUntraced(...)'
     force_clipboard: true
     replace: |-
