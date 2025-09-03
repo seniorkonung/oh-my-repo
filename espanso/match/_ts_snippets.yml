@@ -32,7 +32,6 @@ matches:
     force_clipboard: true
     replace: |-
       Effect.fnUntraced(function*() {
-        const b = $|$;
         return 1 as any;
       })
 
