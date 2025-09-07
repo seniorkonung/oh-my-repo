@@ -77,6 +77,8 @@ matches:
             - Components
             - Types
             - Props
+            - Validators
+            - Methods
 
   - trigger: :idkey
     label: 'idkey'
