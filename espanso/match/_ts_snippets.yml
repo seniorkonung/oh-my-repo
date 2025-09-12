@@ -79,6 +79,7 @@ matches:
             - Props
             - Validators
             - Methods
+            - Hooks
 
   - trigger: :idkey
     label: 'idkey'
