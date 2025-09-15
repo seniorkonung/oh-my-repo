@@ -9,21 +9,11 @@ matches:
         return 1 as any;
       })
 
-  - trigger: :esp
-    label: 'Effect.withSpan(...)(...)'
-    force_clipboard: true
-    replace: |-
-      Effect.withSpan('anonymous')(
-        Effect.gen(function*() {
-          return 1 as any;
-        })
-      )
-
   - trigger: :efn
-    label: 'Effect.fn(...)'
+    label: 'Effect.fn(...)(...)'
     force_clipboard: true
     replace: |-
-      Effect.fn(function*() {
+      Effect.fn()(function*() {
         return 1 as any;
       })
 
@@ -44,6 +34,11 @@ matches:
     label: 'import as * XXX from "..."'
     force_clipboard: true
     replace: import * as XXX from "$|$";
+
+  - trigger: :imp
+    label: 'import XXX from "..."'
+    force_clipboard: true
+    replace: import XXX from "$|$";
 
   - trigger: ://
     label: '//'
