@@ -75,6 +75,7 @@ matches:
             - Validators
             - Methods
             - Hooks
+            - Requests
 
   - trigger: :idkey
     label: 'idkey'
