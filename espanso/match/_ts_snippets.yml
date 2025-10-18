@@ -85,6 +85,8 @@ matches:
             - Methods
             - Hooks
             - Requests
+            - Guards
+            - Functions
 
   - trigger: :idkey
     label: 'idkey'
