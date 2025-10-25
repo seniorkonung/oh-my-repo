@@ -1,0 +1,23 @@
+- name: Установить mise
+  ansible.builtin.shell:
+    cmd: set -o pipefail && curl https://mise.run | sh
+    executable: /bin/bash
+    creates: '{{ ansible_env.HOME }}/.local/bin/mise'
+
+- name: Создать глобальную символическую ссылку для mise
+  become: true
+  ansible.builtin.file:
+    src: '{{ ansible_env.HOME }}/.local/bin/mise'
+    dest: /usr/local/bin/mise
+    state: link
+
+- name: Вызвать команду mise use для возможности автодополнений
+  ansible.builtin.shell:
+    cmd: mise use -g usage
+    executable: /bin/bash
+  changed_when: true
+
+- name: Добавить в .zshrc активацию mise
+  ansible.builtin.lineinfile:
+    path: '{{ ansible_env.HOME }}/.zshrc'
+    line: 'eval "$(~/.local/bin/mise activate zsh)"'

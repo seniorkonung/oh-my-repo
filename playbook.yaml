@@ -81,45 +81,6 @@
           - openjdk-17-jdk
           - fzf
 
-    - name: Проверить наличие fnm
-      ansible.builtin.command: fnm -v
-      register: fnm_check
-      failed_when: false
-      changed_when: false
-
-    - name: Установить fnm
-      ansible.builtin.shell:
-        cmd: set -o pipefail && curl -fsSL https://fnm.vercel.app/install | bash
-        executable: /bin/bash
-      when: fnm_check.rc != 0
-      changed_when: true
-
-    - name: Проверить наличие pnpm
-      ansible.builtin.command: pnpm -v
-      register: pnpm_check
-      failed_when: false
-      changed_when: false
-
-    - name: Установить pnpm
-      ansible.builtin.shell:
-        cmd: set -o pipefail && curl -fsSL https://get.pnpm.io/install.sh | sh -
-        executable: /bin/bash
-      when: pnpm_check.rc != 0
-      changed_when: true
-
-    - name: Проверить наличие bun
-      ansible.builtin.command: bun -v
-      register: bun_check
-      failed_when: false
-      changed_when: false
-
-    - name: Установить bun
-      ansible.builtin.shell:
-        cmd: set -o pipefail && curl -fsSL https://bun.sh/install | bash
-        executable: /bin/bash
-      when: bun_check.rc != 0
-      changed_when: true
-
     - name: Установить zsh и oh-my-zsh
       ansible.builtin.import_tasks: tasks/zsh-setup.ansible.yaml
 
@@ -138,5 +99,5 @@
     - name: Установить watchman
       ansible.builtin.import_tasks: tasks/watchman-setup.ansible.yaml
 
-    - name: Установить task
-      ansible.builtin.import_tasks: tasks/task-setup.ansible.yaml
+    - name: Установить mise
+      ansible.builtin.import_tasks: tasks/mise-setup.ansible.yaml

@@ -67,8 +67,8 @@
         nvm
         node
         npm
-        react-native
         zsh-interactive-cd
+        mise
       )
 
       source {{ ansible_env.HOME }}/.oh-my-zsh/oh-my-zsh.sh
