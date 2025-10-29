@@ -4,10 +4,10 @@ matches:
   - trigger: ':email'
     replace: 'senior.konung@gmail.com'
 
-  - trigger: ':date'
-    replace: '{{mydate}}'
-    vars:
-      - name: mydate
-        type: date
-        params:
-          format: '%m/%d/%Y'
+  - trigger: ':f5tts'
+    label: Vocab
+    replace: 'hf://Misha24-10/F5-TTS_RUSSIAN/F5TTS_v1_Base/vocab.txt'
+
+  - trigger: ':f5tts'
+    label: Model
+    replace: 'hf://Misha24-10/F5-TTS_RUSSIAN/F5TTS_v1_Base_v2/model_last_inference.safetensors'
