@@ -2,7 +2,7 @@
 
 matches:
   - trigger: ':prompt'
-    label: 'Prompt: переделка промпта'
+    label: 'Переделка промпта'
     replace: |
       # Генерация улучшенного промпта на основаниия старого
 
@@ -17,7 +17,7 @@ matches:
       3. Новый промпт должен сохранять язык оригинала
 
   - trigger: ':prompt'
-    label: 'Prompt: генерация ключей i18n'
+    label: 'Генерация ключей i18n'
     replace: |
       # Генерация ключей i18n
 
@@ -35,7 +35,7 @@ matches:
         - `email_already_taken`
 
   - trigger: ':prompt'
-    label: 'Prompt: генерация changeset описания'
+    label: 'Генерация changeset описания'
     replace: |
       # Генерация описания changeset
 
@@ -56,7 +56,7 @@ matches:
       - "Обновлены зависимости до последних версий" → `Updated dependencies to latest versions`
 
   - trigger: ':prompt'
-    label: 'Prompt: генерация названия feature branch в git'
+    label: 'Генерация названия feature branch в git'
     replace: |
       # Генерация названия feature branch в git
 
@@ -90,7 +90,7 @@ matches:
       - "Добавить тесты для корзины" → `test/shopping-cart-tests`
 
   - trigger: ':prompt'
-    label: 'Prompt: генерация названия переменной в TS'
+    label: 'Генерация названия переменной в TS'
     replace: |
       # Именование переменных TypeScript
 
@@ -127,7 +127,7 @@ matches:
       3. Верни **несколько вариантов названия** с кратким обоснованием преимуществ каждого.
 
   - trigger: ':prompt'
-    label: 'Prompt: генерация названий свойств react'
+    label: 'Генерация названий свойств react'
     replace: |
       # Генерация названий свойств интерфейса пропсов React-компонента
 
@@ -141,7 +141,7 @@ matches:
         - удалить комментарии
 
   - trigger: ':prompt'
-    label: 'Prompt: генерация названий в ts'
+    label: 'Генерация названий в ts'
     replace: |
       # Генерация корректных названий в TypeScript
 
@@ -158,3 +158,10 @@ matches:
           интерфейсов, SCREAMING_SNAKE_CASE для констант и т.д.).  
       3. Верни исходный участок кода с заменёнными названиями.  
       4. Удали все комментарии.
+
+  - trigger: ':prompt'
+    label: 'Оценка названий в коде'
+    replace: |
+      Проанализируй предоставленный ниже TypeScript-код с позиции опытного разработчика.  
+      Основной фокус — на качестве и уместности названий переменных, функций, типов и других сущностей.  
+      Входные данные (код) будут передаваться в следующих сообщениях, возможно — неоднократно.
