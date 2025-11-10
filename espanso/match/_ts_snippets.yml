@@ -88,7 +88,8 @@ matches:
             - Guards
             - Functions
             - Events
-            - Event Groups
+            - Encoding
+            - Decoding
 
   - trigger: :idkey
     label: 'idkey'
