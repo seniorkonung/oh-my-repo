@@ -79,7 +79,6 @@ matches:
             - Components
             - Types
             - Props
-            - Validators
             - Methods
             - Hooks
             - Requests
