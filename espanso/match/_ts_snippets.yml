@@ -87,6 +87,8 @@ matches:
             - Events
             - Encoding
             - Decoding
+            - Getters
+            - Setters
 
   - trigger: :idkey
     label: 'idkey'
