@@ -117,3 +117,53 @@ matches:
             - reactnative
             - web
             - noexport
+
+  - trigger: :tst
+    label: ⛔ Error Handling
+    force_clipboard: true
+    replace: '⛔'
+
+  - trigger: :tst
+    label: ✅ Happy Path
+    force_clipboard: true
+    replace: '✅'
+
+  - trigger: :tst
+    label: ⏳ Async / Timing
+    force_clipboard: true
+    replace: '⏳'
+
+  - trigger: :tst
+    label: 🔗 Integration
+    force_clipboard: true
+    replace: '🔗'
+
+  - trigger: :tst
+    label: 📜 Contract / Invariant
+    force_clipboard: true
+    replace: '📜'
+
+  - trigger: :tst
+    label: ⚡ Performance
+    force_clipboard: true
+    replace: '⚡'
+
+  - trigger: :tst
+    label: 🔒 Security / Access
+    force_clipboard: true
+    replace: '🔒'
+
+  - trigger: :tst
+    label: 🐞 Regression
+    force_clipboard: true
+    replace: '🐞'
+
+  - trigger: :tst
+    label: 🔄 Compatibility
+    force_clipboard: true
+    replace: '🔄'
+
+  - trigger: :tst
+    label: 🧱 Boundary / Edge cases
+    force_clipboard: true
+    replace: '🧱'
