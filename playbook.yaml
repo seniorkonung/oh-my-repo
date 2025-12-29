@@ -80,6 +80,8 @@
           - ca-certificates
           - openjdk-17-jdk
           - fzf
+          - gnome-shell-extension-prefs
+          - gnome-shell-extension-gsconnect
 
     - name: Установить zsh и oh-my-zsh
       ansible.builtin.import_tasks: tasks/zsh-setup.ansible.yaml
