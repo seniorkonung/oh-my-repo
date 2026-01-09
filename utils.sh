@@ -47,6 +47,7 @@ alias repo="code $OH_MY_REPO"
 alias s="code ~/projects/oohey/.vscode/oohey.code-workspace && cd ~/projects/oohey"
 alias pass="ohkeepassxc"
 alias repoai="code ~/.claude"
+alias aijson="code ~/.claude.json"
 
 alias gdrive-start="systemctl --user start rclone-google-drive.service"
 alias gdrive-status="systemctl --user status rclone-google-drive.service"
