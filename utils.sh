@@ -46,7 +46,7 @@ alias ohzsh-clear-completion-cache="sudo rm ~/.zcompdump*"
 alias repo="code $OH_MY_REPO"
 alias s="code ~/projects/oohey/.vscode/oohey.code-workspace && cd ~/projects/oohey"
 alias pass="ohkeepassxc"
-alias rc="code ~/.zshrc"
+alias repoai="code ~/.claude"
 
 alias gdrive-start="systemctl --user start rclone-google-drive.service"
 alias gdrive-status="systemctl --user status rclone-google-drive.service"
@@ -59,11 +59,6 @@ alias px="pnpm dlx"
 alias pne="pnpm exec"
 alias pnr="pnpm run"
 
-alias gitc="git commit -m"
-alias gitp="git push"
-
 alias m="mise"
 alias mr="mise run"
 alias mu="mise use"
-
-alias tts="(cd $OH_MY_REPO && mise run start-tts)"
