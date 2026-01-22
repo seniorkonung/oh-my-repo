@@ -89,6 +89,7 @@ matches:
             - Decoding
             - Getters
             - Setters
+            - Predicates
 
   - trigger: :idkey
     label: 'idkey'
@@ -167,3 +168,219 @@ matches:
     label: 🧱 Boundary / Edge cases
     force_clipboard: true
     replace: '🧱'
+
+  - trigger: :init
+    label: Init Aggregate
+    force_clipboard: true
+    replace: |-
+      // platform::crossplatform
+      import { Schema, Data } from 'effect'
+      import { TaggedStruct } from '@oohey/shared'
+
+      type id = 1
+      type key = 1
+      const key = 1
+
+      /**
+       * @group Models
+       */
+      export interface $_MODULE_NAME {
+        readonly _tag: key<'$_MODULE_NAME'>;
+      }
+
+      /**
+       * @group Schemas
+       */
+      export const $_MODULE_NAME = TaggedStruct(key('$_MODULE_NAME'), {}).annotations({
+        identifiers: '$_MODULE_NAME' satisfies id
+      }) satisfies Schema.Schema<$_MODULE_NAME, any>
+
+      /**
+       * @group Constructors
+       */
+      export const make = $_MODULE_NAME.make
+
+  - trigger: :init
+    label: Init Service
+    force_clipboard: true
+    replace: |-
+      // platform::crossplatform
+      import { type Effect } from 'effect';
+      import { ContextTag } from '@oohey/shared';
+      import {} from './$_MODULE_NAME_MINUS_{{name}}.js';
+
+      type id = 1;
+      type key = 1;
+      const key = 1;
+
+      /**
+       * @group Services
+       * @hideconstructor
+       */
+      export abstract class $_MODULE_NAME {
+        static readonly _tag = key('$_MODULE_NAME');
+        static readonly Tag = ContextTag($_MODULE_NAME);
+      }
+    vars:
+      - name: name
+        type: choice
+        params:
+          values:
+            - Service
+            - Repo
+
+  - trigger: :init
+    label: Init Service Provider
+    force_clipboard: true
+    replace: |-
+      // platform::{{platform}}
+      import { Layer, Effect } from 'effect';{{impline}}
+      import { $_MODULE_NAME_MINUS_Provider } from './$_MODULE_NAME_MINUS_Provider.js';
+
+      /**
+       * @group Layers
+       */
+      export const layer = Layer.effect(
+        $_MODULE_NAME_MINUS_Provider.Tag, 
+        Effect.gen(function* () {
+          return 1 as any;
+        }),
+      );
+    vars:
+      - name: platform
+        type: choice
+        params:
+          values:
+            - crossplatform
+            - node
+            - reactnative
+            - web
+            - noexport
+      - name: name
+        type: choice
+        params:
+          values:
+            - None
+            - ServiceProvider
+            - RepoProvider
+      - name: impline
+        type: shell
+        params:
+          cmd: >
+            if [ "{{name}}" = "None" ]; then 
+              echo ""; 
+            else 
+              echo "import { \$_MODULE_NAME_MINUS_{{name}} } from './\$_MODULE_NAME_MINUS_{{name}}.js';"; 
+            fi
+
+  - trigger: :init
+    label: Init Interface Model
+    force_clipboard: true
+    replace: |-
+      /**
+       * @group Models
+       */
+      export interface {{model.name}} {
+        readonly _tag: key<'{{model.name}}'>;
+      }
+
+      /**
+       * @group Schemas
+       */
+      export const {{model.name}} = TaggedStruct(key('{{model.name}}'), {}).annotations({
+        identifiers: '{{model.name}}' satisfies id
+      }) satisfies Schema.Schema<{{model.name}}, any>
+    vars:
+      - name: model
+        type: form
+        params:
+          layout: 'Название модели: [[name]]'
+
+  - trigger: :init
+    label: Init Type Model
+    force_clipboard: true
+    replace: |-
+      /**
+       * @group Models
+       */
+      export type {{model.name}} = {
+        readonly _tag: key<'{{model.name}}'>;
+      }
+
+      /**
+       * @group Schemas
+       */
+      export const {{model.name}} = TaggedStruct(key('{{model.name}}'), {}).annotations({
+        identifiers: '{{model.name}}' satisfies id
+      }) satisfies Schema.Schema<{{model.name}}, any>
+    vars:
+      - name: model
+        type: form
+        params:
+          layout: 'Название модели: [[name]]'
+
+  - trigger: :init
+    label: Init Schema Model
+    force_clipboard: true
+    replace: |-
+      /**
+       * @group Schemas
+       */
+      export const {{model.name}} = Schema.Number.annotations({
+        identifiers: '{{model.name}}' satisfies id
+      }) satisfies Schema.Schema<{{model.name}}, any>
+
+      /**
+       * @group Models
+       */
+      export type {{model.name}} = Schema.Schema.Type<typeof {{model.name}}>
+    vars:
+      - name: model
+        type: form
+        params:
+          layout: 'Название модели: [[name]]'
+
+  - trigger: :init
+    label: Init Error
+    force_clipboard: true
+    replace: |-
+      /**
+      * @group Errors
+      */
+      export class {{model.name}} extends Data.TaggedError(key('{{model.name}}'))<{}> {}
+    vars:
+      - name: model
+        type: form
+        params:
+          layout: 'Название модели: [[name]]'
+
+  - trigger: :init
+    label: Init Policy
+    force_clipboard: true
+    replace: |-
+      // platform::crossplatform
+      import {} from 'effect';
+      import { $_MODULE_NAME_MINUS_Policy } from './$_MODULE_NAME_MINUS_Policy.js';
+      import { User } from '../User/User.js';
+
+      /**
+       * @group Contexts
+       */
+      export interface $_MODULE_NAME_PLUS_Context {
+        readonly requester: User
+        readonly _: $_MODULE_NAME_MINUS_Policy
+      }
+
+      /**
+       * @group Predicates
+       */
+      export const canRead = (context: $_MODULE_NAME_PLUS_Context): boolean => {
+        return false;
+      }
+
+      /**
+       * @group Predicates
+       */
+      export const canUpdate = (context: $_MODULE_NAME_PLUS_Context): boolean => {
+        return false;
+      }
