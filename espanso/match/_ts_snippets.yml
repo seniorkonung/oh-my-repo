@@ -120,54 +120,33 @@ matches:
             - noexport
 
   - trigger: :tst
-    label: ⛔ Error Handling
     force_clipboard: true
-    replace: '⛔'
-
-  - trigger: :tst
-    label: ✅ Happy Path
-    force_clipboard: true
-    replace: '✅'
-
-  - trigger: :tst
-    label: ⏳ Async / Timing
-    force_clipboard: true
-    replace: '⏳'
-
-  - trigger: :tst
-    label: 🔗 Integration
-    force_clipboard: true
-    replace: '🔗'
-
-  - trigger: :tst
-    label: 📜 Contract / Invariant
-    force_clipboard: true
-    replace: '📜'
-
-  - trigger: :tst
-    label: ⚡ Performance
-    force_clipboard: true
-    replace: '⚡'
-
-  - trigger: :tst
-    label: 🔒 Security / Access
-    force_clipboard: true
-    replace: '🔒'
-
-  - trigger: :tst
-    label: 🐞 Regression
-    force_clipboard: true
-    replace: '🐞'
-
-  - trigger: :tst
-    label: 🔄 Compatibility
-    force_clipboard: true
-    replace: '🔄'
-
-  - trigger: :tst
-    label: 🧱 Boundary / Edge cases
-    force_clipboard: true
-    replace: '🧱'
+    replace: '{{output}}'
+    vars:
+      - name: output
+        type: choice
+        params:
+          values:
+            - label: '⛔ Error Handling'
+              id: '⛔'
+            - label: '✅ Happy Path'
+              id: '✅'
+            - label: '⏳ Async / Timing'
+              id: '⏳'
+            - label: '🔗 Integration'
+              id: '🔗'
+            - label: '📜 Contract / Invariant'
+              id: '📜'
+            - label: '⚡ Performance'
+              id: '⚡'
+            - label: '🔒 Security / Access'
+              id: '🔒'
+            - label: '🐞 Regression'
+              id: '🐞'
+            - label: '🔄 Compatibility'
+              id: '🔄'
+            - label: '🧱 Boundary / Edge cases'
+              id: '🧱'
 
   - trigger: :init
     label: Init Aggregate
@@ -384,3 +363,92 @@ matches:
       export const canUpdate = (context: $_MODULE_NAME_PLUS_Context): boolean => {
         return false;
       }
+
+  - trigger: :test
+    label: Init Integration Test File
+    force_clipboard: true
+    replace: |-
+      import { Effect, Option, Exit } from 'effect';
+      import { describe, it, assert, expect } from '@effect/vitest';
+      import { getTestEnv, provideIn } from '@oohey/vitest';
+      import { causeFindTag, causeContainsTag } from '@oohey/shared';
+      import { $_MODULE_NAME_MINUS_Provider } from '#modules';
+      import { layer, Setup } from './$_MODULE_NAME.setup.js';
+
+      describe.runIf(getTestEnv().hasDb)(
+        '$_MODULE_NAME',
+        provideIn(layer, { sequential: true })((it) => {}),
+      );
+
+  - trigger: :test
+    label: Init Unit Test File
+    force_clipboard: true
+    replace: |-
+      import { Effect } from 'effect';
+      import { describe, assert, it, expect } from '@effect/vitest';
+      import { $_MODULE_NAME } from '#modules';
+      import {  } from './$_MODULE_NAME.setup.js';
+
+      describe.sequential('$_MODULE_NAME', () => {});
+
+  - trigger: :test
+    label: Init Setup File
+    force_clipboard: true
+    replace: |-
+      import { Effect, Layer } from 'effect';
+      import { Offset } from '@oohey/vitest';
+      import { $_MODULE_NAME_MINUS_Provider } from '#modules';
+      import { $_MODULE_NAME } from '#modules/node';
+      import { BaseSetup } from './utils/BaseSetup.js';
+      import { provideTestLayer } from './utils/provideTestLayer.js';
+
+      export class Setup extends Effect.Service<Setup>()('Setup', {
+        effect: Effect.gen(function* () {
+          yield* BaseSetup;
+          return {};
+        }),
+      }) {}
+
+      export const layer = $_MODULE_NAME.layer.pipe(
+        Layer.merge(Setup.Default),
+        provideTestLayer,
+      );
+
+  - trigger: :test
+    label: Init `it` Block
+    force_clipboard: true
+    replace: |-
+      it.effect('{{type}}', Effect.fnUntraced(function* () {}));
+    vars:
+      - name: type
+        type: choice
+        params:
+          values:
+            - label: '⛔ Error Handling'
+              id: '⛔'
+            - label: '✅ Happy Path'
+              id: '✅'
+            - label: '⏳ Async / Timing'
+              id: '⏳'
+            - label: '🔗 Integration'
+              id: '🔗'
+            - label: '📜 Contract / Invariant'
+              id: '📜'
+            - label: '⚡ Performance'
+              id: '⚡'
+            - label: '🔒 Security / Access'
+              id: '🔒'
+            - label: '🐞 Regression'
+              id: '🐞'
+            - label: '🔄 Compatibility'
+              id: '🔄'
+            - label: '🧱 Boundary / Edge cases'
+              id: '🧱'
+
+  - trigger: :test
+    label: Init `describe` Block
+    force_clipboard: true
+    replace: |-
+      describe('', () => {
+        it.effect('', Effect.fnUntraced(function* () {}));
+      })
