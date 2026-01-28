@@ -369,7 +369,7 @@ matches:
     force_clipboard: true
     replace: |-
       import { Effect, Option, Exit } from 'effect';
-      import { describe, it, assert, expect } from '@effect/vitest';
+      import { describe, it, assert } from '@effect/vitest';
       import { getTestEnv, provideIn } from '@oohey/vitest';
       import { causeFindTag, causeContainsTag } from '@oohey/shared';
       import { $_MODULE_NAME_MINUS_Provider } from '#modules';
@@ -385,7 +385,7 @@ matches:
     force_clipboard: true
     replace: |-
       import { Effect } from 'effect';
-      import { describe, assert, it, expect } from '@effect/vitest';
+      import { describe, assert, it } from '@effect/vitest';
       import { $_MODULE_NAME } from '#modules';
       import {  } from './$_MODULE_NAME.setup.js';
 
