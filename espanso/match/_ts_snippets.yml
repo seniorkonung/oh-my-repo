@@ -373,6 +373,7 @@ matches:
       import { getTestEnv, provideIn } from '@oohey/vitest';
       import { causeFindTag, causeContainsTag } from '@oohey/shared';
       import { $_MODULE_NAME_MINUS_Provider } from '#modules';
+      import {  } from './utils/helpers.js';
       import { layer, Setup } from './$_MODULE_NAME.setup.js';
 
       describe.runIf(getTestEnv().hasDb)(
@@ -387,7 +388,7 @@ matches:
       import { Effect } from 'effect';
       import { describe, assert, it } from '@effect/vitest';
       import { $_MODULE_NAME } from '#modules';
-      import {  } from './$_MODULE_NAME.setup.js';
+      import {  } from './utils/helpers.js';
 
       describe.sequential('$_MODULE_NAME', () => {});
 
@@ -401,6 +402,7 @@ matches:
       import { $_MODULE_NAME } from '#modules/node';
       import { BaseSetup } from './utils/BaseSetup.js';
       import { provideTestLayer } from './utils/provideTestLayer.js';
+      import {  } from './utils/helpers.js';
 
       export class Setup extends Effect.Service<Setup>()('Setup', {
         effect: Effect.gen(function* () {
