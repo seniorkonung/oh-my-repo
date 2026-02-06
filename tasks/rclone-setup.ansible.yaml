@@ -2,7 +2,7 @@
   ansible.builtin.get_url:
     url: https://downloads.rclone.org/rclone-current-linux-amd64.zip
     dest: /tmp/rclone.zip
-    mode: '0644'
+    mode: "0644"
 
 - name: Распаковать архив
   ansible.builtin.unarchive:
@@ -18,10 +18,10 @@
 
 - name: Переместить исполняемый файл rclone в .local/bin
   ansible.builtin.copy:
-    src: '{{ found_dir.files[0].path }}/rclone'
-    dest: '{{ paths.localbin }}/'
-    directory_mode: '0755'
-    mode: '755'
+    src: "{{ found_dir.files[0].path }}/rclone"
+    dest: "{{ ansible_env.HOME  }}/.local/bin/"
+    directory_mode: "0755"
+    mode: "755"
   register: rclone_bin
 
 - name: Получить путь к файлу конфигурации rclone
@@ -31,30 +31,30 @@
 
 - name: Сохранить путь к конфигу rclone в переменную
   ansible.builtin.set_fact:
-    rclone_config_path: '{{ rclone_config_file.stdout_lines[1] }}'
+    rclone_config_path: "{{ rclone_config_file.stdout_lines[1] }}"
 
 - name: Загрузить конфигурацию
-  ansible.builtin.command: 'gpg -d -q {{ paths.ohmyrepo }}/secrets/rclone-conf.secret'
+  ansible.builtin.command: "gpg -d -q {{ paths.ohmyrepo }}/secrets/rclone-conf.secret"
   register: rclone_config
   changed_when: false
 
 - name: Скопировать конфигурацию rclone
   ansible.builtin.copy:
-    content: '{{ rclone_config.stdout }}'
-    dest: '{{ rclone_config_path }}'
-    mode: '0644'
+    content: "{{ rclone_config.stdout }}"
+    dest: "{{ rclone_config_path }}"
+    mode: "0644"
 
 - name: Создать директорию для монтирования Google Drive
   ansible.builtin.file:
-    path: '{{ ansible_env.HOME }}/gdrive'
+    path: "{{ ansible_env.HOME }}/gdrive"
     state: directory
-    mode: '0755'
+    mode: "0755"
 
 - name: Создать директорию для systemd user units
   ansible.builtin.file:
-    path: '{{ ansible_env.HOME }}/.config/systemd/user'
+    path: "{{ ansible_env.HOME }}/.config/systemd/user"
     state: directory
-    mode: '0755'
+    mode: "0755"
 
 - name: Создать systemd unit для rclone
   ansible.builtin.copy:
@@ -69,8 +69,8 @@
 
       [Install]
       WantedBy=default.target
-    dest: '{{ ansible_env.HOME }}/.config/systemd/user/rclone-google-drive.service'
-    mode: '0644'
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/rclone-google-drive.service"
+    mode: "0644"
 
 - name: Перезагрузить systemd user units
   ansible.builtin.systemd:

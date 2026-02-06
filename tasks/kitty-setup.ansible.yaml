@@ -2,66 +2,66 @@
   ansible.builtin.get_url:
     url: https://sw.kovidgoyal.net/kitty/installer.sh
     dest: /tmp/kitty-installer.sh
-    mode: '0755'
+    mode: "0755"
 
 - name: Установить kitty терминал
   ansible.builtin.command:
     cmd: /tmp/kitty-installer.sh launch=n
-    creates: '{{ ansible_env.HOME }}/.local/kitty.app/bin/kitty'
+    creates: "{{ ansible_env.HOME }}/.local/kitty.app/bin/kitty"
 
 - name: Добавить kitty в PATH
   ansible.builtin.lineinfile:
-    path: '{{ ansible_env.HOME }}/.zshrc'
-    line: 'export PATH=$PATH:{{ ansible_env.HOME }}/.local/kitty.app/bin'
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    line: "export PATH=$PATH:{{ ansible_env.HOME }}/.local/kitty.app/bin"
 
 - name: Создать симлинк для kitty
   ansible.builtin.file:
-    src: '{{ ansible_env.HOME }}/.local/kitty.app/bin/kitty'
-    dest: '{{ paths.localbin }}/kitty'
+    src: "{{ ansible_env.HOME }}/.local/kitty.app/bin/kitty"
+    dest: "{{ ansible_env.HOME  }}/.local/bin/kitty"
     state: link
 
 - name: Создать симлинк для kitten
   ansible.builtin.file:
-    src: '{{ ansible_env.HOME }}/.local/kitty.app/bin/kitten'
-    dest: '{{ paths.localbin }}/kitten'
+    src: "{{ ansible_env.HOME }}/.local/kitty.app/bin/kitten"
+    dest: "{{ ansible_env.HOME  }}/.local/bin/kitten"
     state: link
 
 - name: Скопировать kitty.desktop
   ansible.builtin.copy:
-    src: '{{ ansible_env.HOME }}/.local/kitty.app/share/applications/kitty.desktop'
-    dest: '{{ ansible_env.HOME }}/.local/share/applications/kitty.desktop'
-    mode: '0644'
+    src: "{{ ansible_env.HOME }}/.local/kitty.app/share/applications/kitty.desktop"
+    dest: "{{ ansible_env.HOME }}/.local/share/applications/kitty.desktop"
+    mode: "0644"
 
 - name: Скопировать kitty-open.desktop
   ansible.builtin.copy:
-    src: '{{ ansible_env.HOME }}/.local/kitty.app/share/applications/kitty-open.desktop'
-    dest: '{{ ansible_env.HOME }}/.local/share/applications/kitty-open.desktop'
-    mode: '0644'
+    src: "{{ ansible_env.HOME }}/.local/kitty.app/share/applications/kitty-open.desktop"
+    dest: "{{ ansible_env.HOME }}/.local/share/applications/kitty-open.desktop"
+    mode: "0644"
 
 - name: Исправить путь к иконке в kitty.desktop
   ansible.builtin.replace:
-    path: '{{ ansible_env.HOME }}/.local/share/applications/kitty.desktop'
-    regexp: '^Icon=kitty'
-    replace: 'Icon={{ ansible_env.HOME }}/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png'
+    path: "{{ ansible_env.HOME }}/.local/share/applications/kitty.desktop"
+    regexp: "^Icon=kitty"
+    replace: "Icon={{ ansible_env.HOME }}/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png"
 
 - name: Исправить путь к бинарнику в kitty.desktop
   ansible.builtin.replace:
-    path: '{{ ansible_env.HOME }}/.local/share/applications/kitty.desktop'
-    regexp: '^Exec=kitty'
-    replace: 'Exec={{ ansible_env.HOME }}/.local/kitty.app/bin/kitty'
+    path: "{{ ansible_env.HOME }}/.local/share/applications/kitty.desktop"
+    regexp: "^Exec=kitty"
+    replace: "Exec={{ ansible_env.HOME }}/.local/kitty.app/bin/kitty"
 
 - name: Добавить kitty.desktop в xdg-terminals.list
   ansible.builtin.lineinfile:
-    path: '{{ ansible_env.HOME }}/.config/xdg-terminals.list'
-    line: 'kitty.desktop'
+    path: "{{ ansible_env.HOME }}/.config/xdg-terminals.list"
+    line: "kitty.desktop"
     create: true
     state: present
-    mode: '0644'
+    mode: "0644"
 
 - name: Добавить импорт конфигурации kitty в kitty.conf
   ansible.builtin.lineinfile:
-    path: '{{ ansible_env.HOME }}/.config/kitty/kitty.conf'
-    line: 'include {{ paths.ohmyrepo }}/kitty/kitty.conf'
+    path: "{{ ansible_env.HOME }}/.config/kitty/kitty.conf"
+    line: "include {{ paths.ohmyrepo }}/kitty/kitty.conf"
     create: true
     state: present
-    mode: '0644'
+    mode: "0644"

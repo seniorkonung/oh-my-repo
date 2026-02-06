@@ -6,53 +6,52 @@
 - name: Change default shell to zsh
   become: true
   ansible.builtin.user:
-    name: '{{ ansible_env.USER }}'
+    name: "{{ ansible_env.USER }}"
     shell: /usr/bin/zsh
 
 - name: Ensure ~/.zshrc exists
   ansible.builtin.file:
-    path: '{{ ansible_env.HOME }}/.zshrc'
+    path: "{{ ansible_env.HOME }}/.zshrc"
     state: touch
-    mode: '0644'
+    mode: "0644"
 
 - name: Ensure ~/.zshenv exists
   ansible.builtin.file:
-    path: '{{ ansible_env.HOME }}/.zshenv'
+    path: "{{ ansible_env.HOME }}/.zshenv"
     state: touch
-    mode: '0644'
+    mode: "0644"
 
 - name: Install oh-my-zsh
   ansible.builtin.shell:
     cmd: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    creates: '{{ ansible_env.HOME }}/.oh-my-zsh'
+    creates: "{{ ansible_env.HOME }}/.oh-my-zsh"
   changed_when: true
 
 - name: Install zsh-autosuggestions plugin
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-autosuggestions
-    dest: '{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions'
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
     version: master
     update: false
 
 - name: Install zsh-completions plugin
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-completions
-    dest: '{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-completions'
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-completions"
     version: master
     update: false
 
 - name: Install zsh-syntax-highlighting plugin
   ansible.builtin.git:
     repo: https://github.com/zsh-users/zsh-syntax-highlighting
-    dest: '{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting'
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
     version: master
     update: false
 
 - name: В .zshrc добавить инициализацию
   ansible.builtin.blockinfile:
-    path: '{{ ansible_env.HOME }}/.zshrc'
+    path: "{{ ansible_env.HOME }}/.zshrc"
     block: |
-      fpath=({{ paths.ohmyrepo }}/completions $fpath)
       fpath=({{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-completions/src $fpath)
 
       ZSH_THEME="agnoster"
@@ -64,9 +63,10 @@
         zsh-autosuggestions
         zsh-completions
         rust
-        nvm
         node
         npm
+        bun
+        dockers
         zsh-interactive-cd
         mise
       )
@@ -75,10 +75,10 @@
 
 - name: В .zshenv добавить подгрузку утилит
   ansible.builtin.lineinfile:
-    path: '{{ ansible_env.HOME }}/.zshenv'
-    line: 'source {{ paths.ohmyrepo }}/utils.sh'
+    path: "{{ ansible_env.HOME }}/.zshenv"
+    line: "source {{ paths.ohmyrepo }}/utils.sh"
 
 - name: В .zshenv добавить переменную с путём к oh-my-repo
   ansible.builtin.lineinfile:
-    path: '{{ ansible_env.HOME }}/.zshenv'
-    line: 'export OH_MY_REPO={{ paths.ohmyrepo }}'
+    path: "{{ ansible_env.HOME }}/.zshenv"
+    line: "export OH_MY_REPO={{ paths.ohmyrepo }}"

@@ -1,13 +1,5 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/espanso/espanso/dev/schemas/match.schema.json
 
 matches:
-  - trigger: ':email'
-    replace: 'senior.konung@gmail.com'
-
-  - trigger: ':f5tts'
-    label: Vocab
-    replace: 'hf://Misha24-10/F5-TTS_RUSSIAN/F5TTS_v1_Base/vocab.txt'
-
-  - trigger: ':f5tts'
-    label: Model
-    replace: 'hf://Misha24-10/F5-TTS_RUSSIAN/F5TTS_v1_Base_v2/model_last_inference.safetensors'
+  - trigger: ":email"
+    replace: "senior.konung@gmail.com"
