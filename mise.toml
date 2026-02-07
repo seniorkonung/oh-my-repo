@@ -1,0 +1,37 @@
+[env]
+FORCE_COLOR = "3"
+FULLNAME = "Valentin Panchenko"
+EMAIL = "senior.konung@gmail.com"
+GPGID = "425C78F2BA2BBAA7"
+OH_MY_REPO = "{{config_root}}"
+
+[tools]
+deno = "latest"
+
+[tasks]
+"setup:gpg" = "./scripts/gpg-setup.ts"
+"setup:ssh" = "./scripts/ssh-setup.ts"
+"setup:packages" = "./scripts/zsh-setup.ts"
+"setup:kitty" = "./scripts/kitty-setup.ts"
+"setup:git" = "./scripts/git-setup.ts"
+"setup:docker" = "./scripts/docker-setup.ts"
+"setup:mise" = "./scripts/mise-setup.ts"
+"setup:rclone" = "./scripts/rclone-setup.ts"
+"setup:watchman" = "./scripts/watchman-setup.ts"
+"setup:zsh" = "./scripts/zsh-setup.ts"
+"setup:keyboard" = "./scripts/keyboard-setup.ts"
+
+[tasks.setup]
+run = [
+    "mise run setup:gpg",
+    "mise run setup:ssh",
+    "mise run setup:packages",
+    "mise run setup:keyboard",
+    "mise run setup:git",
+    "mise run setup:zsh",
+    "mise run setup:kitty",
+    "mise run setup:docker",
+    "mise run setup:mise",
+    "mise run setup:rclone",
+    "mise run setup:watchman"
+]

@@ -35,3 +35,5 @@ alias m="mise"
 alias mr="mise run"
 alias mu="mise use"
 alias mconf="code ~/.config/mise/config.toml"
+
+alias omr="mise run -C $OH_MY_REPO"
