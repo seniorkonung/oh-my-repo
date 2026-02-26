@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno run --allow-read --allow-sys --allow-env --allow-run --allow-write
 import { $, chalk } from "npm:zx@8.8.5";
-import * as utils from "./utils.ts";
+import * as utils from "../utils.ts";
 
 const INSTALLER_URL = "https://sw.kovidgoyal.net/kitty/installer.sh";
 const INSTALLER_PATH = "/tmp/kitty-installer.sh";

@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno run --allow-read --allow-sys --allow-env --allow-run --allow-write --allow-net
 import { $, chalk } from "npm:zx@8.8.5";
-import * as utils from "./utils.ts";
+import * as utils from "../utils.ts";
 
 const home = utils.getEnvVar("HOME");
 const paths = {

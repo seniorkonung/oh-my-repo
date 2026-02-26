@@ -1,4 +1,6 @@
 [env]
+'_'.file = { path = ".env" }
+
 FORCE_COLOR = "3"
 FULLNAME = "Valentin Panchenko"
 EMAIL = "senior.konung@gmail.com"
@@ -9,17 +11,17 @@ OH_MY_REPO = "{{config_root}}"
 deno = "latest"
 
 [tasks]
-"setup:gpg" = "./scripts/gpg-setup.ts"
-"setup:ssh" = "./scripts/ssh-setup.ts"
-"setup:packages" = "./scripts/zsh-setup.ts"
-"setup:kitty" = "./scripts/kitty-setup.ts"
-"setup:git" = "./scripts/git-setup.ts"
-"setup:docker" = "./scripts/docker-setup.ts"
-"setup:mise" = "./scripts/mise-setup.ts"
-"setup:rclone" = "./scripts/rclone-setup.ts"
-"setup:watchman" = "./scripts/watchman-setup.ts"
-"setup:zsh" = "./scripts/zsh-setup.ts"
-"setup:keyboard" = "./scripts/keyboard-setup.ts"
+"setup:gpg" = "./scripts/setup/gpg-setup.ts"
+"setup:ssh" = "./scripts/setup/ssh-setup.ts"
+"setup:packages" = "./scripts/setup/zsh-setup.ts"
+"setup:kitty" = "./scripts/setup/kitty-setup.ts"
+"setup:git" = "./scripts/setup/git-setup.ts"
+"setup:docker" = "./scripts/setup/docker-setup.ts"
+"setup:mise" = "./scripts/setup/mise-setup.ts"
+"setup:rclone" = "./scripts/setup/rclone-setup.ts"
+"setup:watchman" = "./scripts/setup/watchman-setup.ts"
+"setup:zsh" = "./scripts/setup/zsh-setup.ts"
+"setup:keyboard" = "./scripts/setup/keyboard-setup.ts"
 
 [tasks.setup]
 run = [
@@ -35,3 +37,7 @@ run = [
     "mise run setup:rclone",
     "mise run setup:watchman"
 ]
+
+[tasks.group-tasks]
+env.TODOIST_API_KEY = { redact = true, required = true }
+run = "./scripts/todoist-group-tasks.ts"

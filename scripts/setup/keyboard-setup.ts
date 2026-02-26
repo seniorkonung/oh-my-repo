@@ -1,6 +1,6 @@
 #!/usr/bin/env -S deno run --allow-read --allow-sys --allow-env --allow-run
 import { $, chalk } from "npm:zx@8.8.5";
-import * as utils from "./utils.ts";
+import * as utils from "../utils.ts";
 
 async function setupKeyboardLayoutSwitch(): Promise<void> {
   utils.logStep("Установка переключения раскладки по Caps Lock");
