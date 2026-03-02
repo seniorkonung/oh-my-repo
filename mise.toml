@@ -38,6 +38,7 @@ run = [
     "mise run setup:watchman"
 ]
 
-[tasks.group-tasks]
+[tasks.t]
 env.TODOIST_API_KEY = { redact = true, required = true }
+env.TODOIST_PROJECTS = { required = true }
 run = "./scripts/todoist-group-tasks.ts"

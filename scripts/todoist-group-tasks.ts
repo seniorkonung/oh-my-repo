@@ -5,7 +5,7 @@ import {
     type Task,
     TodoistApi,
 } from "npm:@doist/todoist-api-typescript@6.8.0";
-import { getEnvVar, logError, logStep, logSuccess } from "./utils.ts";
+import { getEnvVar, logStep, logSuccess } from "./utils.ts";
 
 const api = new TodoistApi(getEnvVar("TODOIST_API_KEY"));
 
@@ -24,25 +24,7 @@ async function* getTasks(projectId: string) {
     }
 }
 
-function getProjectId(): string {
-    try {
-        const url = new URL(Deno.args[0]);
-        const projectId = url.pathname
-            .slice(url.pathname.lastIndexOf("-") + 1)
-            .replaceAll("/", "");
-        if (projectId.length !== 16) throw new Error("Неправильная ссылка");
-        return projectId;
-    } catch (error) {
-        logError(
-            "В качестве арумента должна быть ссылка на проект todoist",
-            error,
-        );
-        Deno.exit(1);
-    }
-}
-
-async function main() {
-    const projectId = getProjectId();
+async function main(projectId: string) {
     const allTasks = (await Array.fromAsync(getTasks(projectId))).flat();
     logStep("Загружено задач: " + allTasks.length);
     const tasks = allTasks
@@ -114,4 +96,6 @@ async function main() {
     logSuccess("Задачи успешно сгруппированы");
 }
 
-main();
+for (const projectId of getEnvVar("TODOIST_PROJECTS").split(",")) {
+    main(projectId);
+}
